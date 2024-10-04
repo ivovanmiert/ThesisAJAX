@@ -1,0 +1,31 @@
+#!/bin/bash
+#Set job requirements
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --job-name=trainModel
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=18
+#SBATCH --time=01:15:30
+#SBATCH --output=slurm_output_%A.out 
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --mail-user=i.a.j.van.miert@student.vu.nl
+
+model purge 
+module load 2022
+module load Anaconda3/2022.05
+
+#Your job starts in the directory where you call sbatch
+cd $HOME/sportlight_folder/soccernet-calibration-sportlight
+#Activate your environment
+source activate sportlight3
+#Copy data to scratchs
+mkdir -p /scratch-shared/$USER
+cp -r $HOME/sportlight_folder/soccernet-calibration-sportlight/data /scratch-shared/$USER
+#cp -r $HOME/sportlight_folder/soccernet-calibration-sportlight/data "$TMPDIR"
+#Run your code
+
+srun python -u $HOME/sportlight_folder/soccernet-calibration-sportlight/src/models/hrnet/prediction_mine2_preprocess5.py
+# Copy output back from scratch to the directory from where the job was submitted
+#cp /scratch-shared/ivanmiert/data/model_finals2.pt $HOME
+
+
