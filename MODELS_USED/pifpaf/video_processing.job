@@ -1,0 +1,23 @@
+#!/bin/bash
+#Set job requirements
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --job-name=trainModel
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=18
+#SBATCH --time=00:00:20
+#SBATCH --output=slurm_output_%A.out 
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --mail-user=i.a.j.van.miert@student.vu.nl
+
+model purge 
+module load 2022
+module load Anaconda3/2022.05
+
+#Your job starts in the directory where you call sbatch
+cd $HOME/pifpaf
+#Activate your environment
+source activate pifpaf
+
+python -m openpifpaf.video --source /scratch-shared/ivanmiert/Sliced_Clips/1767073123.mp4 --video-output /home/ivanmiert/pifpaf/test/video.mp4 --json-output /home/ivanmiert/pifpaf/test/new_json_output.json
+

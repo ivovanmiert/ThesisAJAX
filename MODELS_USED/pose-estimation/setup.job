@@ -1,0 +1,32 @@
+#!/bin/bash
+#Set job requirements
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --job-name=trainModel
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=18
+#SBATCH --time=00:03:00
+#SBATCH --output=slurm_output_%A.out 
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --mail-user=i.a.j.van.miert@student.vu.nl
+
+#model purge 
+module load 2022
+module load Anaconda3/2022.05
+module load CUDA/11.8.0
+
+#Your job starts in the directory where you call sbatch
+cd $HOME/pose-estimation
+#Activate your environment
+source activate topdown
+#Copy data to scratchs
+#mkdir -p /scratch-shared/$USER
+#cp -r $HOME/sportlight_folder/soccernet-calibration-sportlight/data /scratch-shared/$USER
+#cp -r $HOME/sportlight_folder/soccernet-calibration-sportlight/data "$TMPDIR"
+#Run your code
+srun python -u $HOME/pose-estimation/infer_1sep.py 
+# Copy output back from scratch to the directory from where the job was submitted
+#cp /scratch-shared/ivanmiert/output_posenet_2.png $HOME/pose-estimation
+#cp -r /scratch-shared/ivanmiert/wasb $HOME/pose-estimation
+
+
