@@ -1,0 +1,30 @@
+#!/bin/bash
+#Set job requirements
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --job-name=trainModel
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=18
+#SBATCH --time=00:20:00
+#SBATCH --output=slurm_output_%A.out 
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --mail-user=i.a.j.van.miert@student.vu.nl
+
+model purge 
+module load 2022
+module load Anaconda3/2022.05
+
+#Your job starts in the directory where you call sbatch
+cd $HOME/home/ivanmiert/overview/field_localization
+#Activate your environment
+source activate sportlight3
+#Copy data to scratchs
+#mkdir -p /scratch-shared/$USER
+#cp -r $HOME/sportlight_folder/soccernet-calibration-sportlight/data/1724482254 /scratch-shared/$USER/data/clip_test2_1/
+#cp -r $HOME/sportlight_folder/soccernet-calibration-sportlight/data "$TMPDIR"
+#Run your code
+srun python -u $HOME/overview/run_models/field_localization/run_keypoints_calibration.py
+# Copy output back from scratch to the directory from where the job was submitted
+#cp -r /scratch-shared/ivanmiert/data/results_test/ $HOME/sportlight_folder/soccernet-calibration-sportlight/data/output_frames
+
+
