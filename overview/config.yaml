@@ -1,0 +1,102 @@
+folders:
+  main_folder: /scratch-shared/ivanmiert/overview
+  video_folder: /scratch-shared/ivanmiert/All_matches_27aug
+  output_folder_frames: /scratch-shared/ivanmiert/overview/frames_folder
+  dataframes_chunks_folder: /home/ivanmiert/overview/FRAMES_EXTRACTION/dataframes_eventdata/dataframes_chunks_1000
+  output_folder_detection_csv_raw: /scratch-shared/ivanmiert/overview/ball_detection
+  output_folder_detection_csv_processed: /scratch-shared/ivanmiert/overview/ball_detection_processed
+  output_folder_keypoint_calibration: /scratch-shared/ivanmiert/overview/calibration
+  output_folder_pifpaf: /scratch-shared/ivanmiert/overview/pifpaf
+  output_folder_player_detections: /scratch-shared/ivanmiert/overview/player_detections
+  output_folder_top_down: /scratch-shared/ivanmiert/overview/top_down
+  player_features_bottom_up: /scratch-shared/ivanmiert/overview/output_featurelists_players
+  ball_features_bottom_up: '/scratch-shared/ivanmiert/overview/output_featurelists_ball'
+  concatenated_features_bottom_up: '/scratch-shared/ivanmiert/overview/concatenated_features'
+event_data:
+  dataframe_chunk_1: /home/ivanmiert/overview/FRAMES_EXTRACTION/dataframes_eventdata/dataframes_chunks_1000/chunk_1.csv
+  dataframe_chunk_2: /home/ivanmiert/overview/FRAMES_EXTRACTION/dataframes_eventdata/dataframes_chunks_1000/chunk_2.csv
+  all: /home/ivanmiert/overview/FRAMES_EXTRACTION/dataframes_eventdata/all_selected.csv
+  chunk_template: /home/ivanmiert/overview/FRAMES_EXTRACTION/dataframes_eventdata/dataframes_chunks_1000/chunk_{}.csv
+
+
+
+template_folders:
+  base: /scratch-shared/ivanmiert/overview/frames_folder_base
+  ball_detect: /scratch-shared/ivanmiert/overview/ball_detect_raw
+  player_detect: /scratch-shared/ivanmiert/overview/player_detect
+  keypoints_list: /scratch-shared/ivanmiert/overview/keypoints_test
+  keypoints_pred: /scratch-shared/ivanmiert/overview/keypoints_pred
+  pifpaf_pred: /scratch-shared/ivanmiert/overview/pifpaf_pred
+  ball_detect_processed: /scratch-shared/ivanmiert/overview/ball_detect_processed
+  ball_features_bottom_up: /scratch-shared/ivanmiert/overview/ball_features
+  player_features_bottom_up: /scratch-shared/ivanmiert/overview/player_features
+  top_down_pred: /scratch-shared/ivanmiert/overview/top_down_pred
+  concatenated_features_bottom_up: /scratch-shared/ivanmiert/overview/concatenated_bottom_up
+  ball_features_top_down: /scratch-shared/ivanmiert/overview/ball_features_top_down
+  player_features_top_down: /scratch-shared/ivanmiert/overview/player_features_top_down
+  concatenated_features_top_down: /scratch-shared/ivanmiert/overview/concatenated_top_down
+  concatenated_features_bottom_up_new: /scratch-shared/ivanmiert/overview/concatenated_bottom_up_intersection
+  concatenated_features_top_down_new: /scratch-shared/ivanmiert/overview/concatenated_top_down_intersection
+
+info:
+  num_gpus: 1
+  frame_rate: 25
+  hpe_sort: bottom_up
+  current_chunk: 1
+  current_part: 5
+  event_range: 1
+  current_part_top_down: 1
+
+classification:
+  number_of_classes: 5
+  number_of_layers: 2
+  number_of_features: 130
+  number_of_features_other: 79
+  model_save_path: /scratch-shared/ivanmiert/overview/models/model_3_2_16.pt
+  dataframe_save_path: /scratch-shared/ivanmiert/overview/dataframes/dataframe_3_2_16.csv
+  sort: shot_on_target
+  model_save_template: /scratch-shared/ivanmiert/overview/models2/{}{}{}{}{}{}{}{}.pt
+  dataframe_save_path: /scratch-shared/ivanmiert/overview/dataframes_new2/{}{}{}{}{}{}{}{}.csv
+
+model_paths:
+  yolo_path: /home/ivanmiert/YOLOv8-football/football/yolov8m-football.pt
+  calib_path: /scratch-shared/ivanmiert/data/model_finals_full.pt
+  top_down_path: /home/ivanmiert/pose-estimation/posehrnet_w48_256x192.pth
+
+output_files:
+  selected_clips_folder: /home/ivanmiert/overview/run_models/field_localization/selected_clips_files/selected.json
+  labels_chunk1: /scratch-shared/ivanmiert/overview/labels/chunk1/
+  labels_chunk1_file: /scratch-shared/ivanmiert/overview/labels/chunk1/df_label.csv
+  labels_all: /scratch-shared/ivanmiert/overview/labels/
+  labels_all_file: /scratch-shared/ivanmiert/overview/labels/df_label.csv
+  labels_multiple_file: /scratch-shared/ivanmiert/overview/labels/df_label_full.csv
+
+confidences:
+  ball_detect_confidence: 0.1
+  player_detect_confidence: 0.8
+  top_down_confidence: 0.4
+  top_down_iou: 0.5
+
+
+test_detections:
+  frames_folder: /scratch-shared/ivanmiert/final_events_folder_9sept
+  output_folder_csv: /scratch-shared/ivanmiert/detectionstest11sept_7
+  output_folder_pifpaf_test: /scratch-shared/ivanmiert/pifpaftest12sept_7
+  output_folder_keypoints_calibration_test: /scratch-shared/ivanmiert/keypoints_calibration_test
+  output_ball_detections_test_raw: /scratch-shared/ivanmiert/ball_detections_raw
+  output_ball_detections_test_processed: /scratch-shared/ivanmiert/ball_detections_processed   
+  output_folder_topdown_test: /scratch-shared/ivanmiert/topdown_test12sept_2
+  
+
+base:
+  output_path_template: /scratch-shared/ivanmiert/overview/output_dataframe/dataframe_{}.csv
+  json_field_coordinates: /home/ivanmiert/NEW_OBJECT/files_folder/all_types_coordinates.json
+  excel_kits_field: /home/ivanmiert/NEW_OBJECT/kits_excel.xlsx
+  class_names: /home/ivanmiert/frames_home/class_names_all.json
+  classify_model_path: /home/ivanmiert/frames_home/football_classifier_model_vgg16_all_classes_filtered_4layers_plusscaledhisto_new_05_14_39-second.keras
+
+
+
+
+
+
