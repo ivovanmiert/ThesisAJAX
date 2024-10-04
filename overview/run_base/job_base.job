@@ -1,0 +1,23 @@
+#!/bin/bash
+#Set job requirements
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --job-name=trainModel
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=18
+#SBATCH --time=00:35:00
+#SBATCH --output=slurm_output_%A.out 
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --mail-user=i.a.j.van.miert@student.vu.nl
+
+model purge 
+module load 2022
+module load Anaconda3/2022.05
+module load CUDA/11.8.0
+
+#Your job starts in the directory where you call sbatch
+cd $HOME/overview/run_base
+#Activate your environment
+source activate football_classifier
+
+srun python base.py
