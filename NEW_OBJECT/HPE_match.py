@@ -1,6 +1,13 @@
 import pandas as pd
 import ast 
 
+"""
+This class is regarding the matching of bottom-up HPE detections to a Player object. 
+Since bottom-up HPE detection is performed on the full image at once, they are not connected to a Player bounding box as is the case for the top-down HPE detections. 
+This class connects the bottom-up hpe detections to the right player detections 
+"""
+
+
 class HPE_Matcher:
         def __init__(self, hpe_csv_path, hpe_sort):
             """
