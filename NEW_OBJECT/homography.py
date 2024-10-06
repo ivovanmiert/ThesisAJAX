@@ -3,6 +3,11 @@ import cv2
 import torch
 import json
 
+"""
+This class is regarding the estimation and appliance of homographies for each frame. 
+"""
+
+
 class HomographyEstimator:
     def __init__(self, field_keypoints, predictions_file):
         self.field_keypoints = field_keypoints.get_keypoints()  # Get the keypoints dictionary directly
