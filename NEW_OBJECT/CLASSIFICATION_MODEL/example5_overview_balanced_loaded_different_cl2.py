@@ -11,6 +11,13 @@ import time
 import functools
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+"""
+This file contains the code on the creation, training, validating, evaluating of the classification models. 
+
+"""
+
+
+
 # Function to read CSV files and load data
 def load_data_from_folder(folder_path, label_csv_path):
     label_df = pd.read_csv(label_csv_path)
@@ -91,10 +98,9 @@ class ClipDataset(Dataset):
         self.scaler = StandardScaler()
         all_features = np.concatenate([frame['features'] for clip in data for frame in clip['frame_data']], axis=0)
         self.scaler.fit(all_features)
-        # Create a label encoder for each label column
         self.label_encoders = {col: LabelEncoder() for col in label_columns}
         for col in label_columns:
-            all_labels = [clip[col] for clip in data]  # Collect all labels for this column
+            all_labels = [clip[col] for clip in data]  
             self.label_encoders[col].fit(all_labels)
         
     def __len__(self):
@@ -104,20 +110,18 @@ class ClipDataset(Dataset):
         clip = self.data[idx]
         for frame in clip['frame_data']:
             frame['features'] = self.scaler.transform(frame['features'])
-        # Encode each label column and store it in a dictionary
         labels = {col: torch.tensor(self.label_encoders[col].transform([clip[col]])[0], dtype=torch.long)
                   for col in self.label_columns}
         
         return {'frame_data': clip['frame_data'], 'labels': labels}
     
     def get_labels(self, label_col):
-        # Return labels for a specific label column
         return [self.label_encoders[label_col].transform([clip[label_col]])[0] for clip in self.data]
 
 class FocalLoss(nn.Module):
     def __init__(self, alpha=None, gamma=2):
         super(FocalLoss, self).__init__()
-        self.alpha = alpha  # Class weights (tensor)
+        self.alpha = alpha 
         self.gamma = gamma
 
     def forward(self, inputs, targets):
@@ -126,12 +130,10 @@ class FocalLoss(nn.Module):
         focal_loss = (1 - pt) ** self.gamma * ce_loss
         return focal_loss.mean()
     
-# Collate function
+
 def collate_fn(batch, relevant_column):
     frame_data_list = [item['frame_data'] for item in batch]
     labels = torch.tensor([item['labels'][relevant_column] for item in batch], dtype=torch.long)
-    #print('print in collate:')
-    #print(labels)
     clip_ids = [item['clip_id'] for item in batch] 
     max_frames = max(len(frame_data) for frame_data in frame_data_list)
     max_objects = max(max(len(frame['objects']) for frame in frame_data) for frame_data in frame_data_list)
@@ -148,7 +150,6 @@ def collate_fn(batch, relevant_column):
     
     return padded_sequences, labels, masks, clip_ids
 
-# Attention Mechanism
 class Attention(nn.Module):
     def __init__(self, hidden_size):
         super(Attention, self).__init__()
@@ -160,7 +161,7 @@ class Attention(nn.Module):
         attention_weights = torch.softmax(attention_scores, dim=1)
         return torch.sum(lstm_output * attention_weights.unsqueeze(-1), dim=1)
 
-# Attention Pooling
+
 class AttentionPooling(nn.Module):
     def __init__(self, hidden_size):
         super(AttentionPooling, self).__init__()
@@ -171,7 +172,6 @@ class AttentionPooling(nn.Module):
         attention_weights = torch.softmax(attention_scores, dim=1)
         return torch.sum(x * attention_weights.unsqueeze(-1), dim=1)
 
-# Classifier with Dropout
 class LSTMClassifier(nn.Module):
     def __init__(self, input_size, hidden_size, num_layers, num_classes, dropout_rate):
         super(LSTMClassifier, self).__init__()
@@ -206,7 +206,6 @@ class LSTMClassifier(nn.Module):
         logits = self.fc2(pooled_output)
         return logits
 
-# Split data into training and validation sets
 def split_dataset(dataset, val_split=0.2, test_split=0.1):
     test_size = int(len(dataset)* test_split)
     val_size = int(len(dataset) * val_split)
@@ -214,11 +213,9 @@ def split_dataset(dataset, val_split=0.2, test_split=0.1):
     return random_split(dataset, [train_size, val_size, test_size])
 
 def load_data_for_model(dataset, model_label_column, relevant_labels):
-    # Filter out only the instances that are relevant for this model
     # print(model_label_column)
     # print(relevant_labels)
     # filtered_data = {key: value for key, value in dataset.items() if value[model_label_column] in relevant_labels}
-    # Initialize a list to hold filtered data
     filtered_data = []
     print(f"relevant labels: {relevant_labels}")
     print(f"model column: {model_label_column}")
