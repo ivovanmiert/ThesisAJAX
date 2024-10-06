@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import cv2
 
+"""
+This class is regarding the transformation of the player detection outcomes, into easy accessible detections for other functions in this folder
+"""
 
 class Player_Detector:
     def __init__(self, file_path):
