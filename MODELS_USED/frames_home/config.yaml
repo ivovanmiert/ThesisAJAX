@@ -1,0 +1,3 @@
+data_paths:
+  sliced_clips_base_folder: '/scratch-shared/ivanmiert/Sliced_Clips'
+  frames_sliced_clips_base_folder: '/scratch-shared/ivanmiert/frames_sliced_clips_base_folder'
