@@ -5,5 +5,4 @@ The model is ran on HPC Snellius, on which some packages are pre-installed itsel
 module load 2022
 module load Anaconda3/2022.05
 
-Besides these modules, for every job an environment was loaded. The requirements for these environments can be found in this folder. 
-
+Besides these modules, for every job an environment was loaded. The requirements for these environments can be found in this folder. The requirements files are named after the environment, so for every job were an environment is loaded, it is clear which requirements are needed for that environment. 
