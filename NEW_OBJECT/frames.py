@@ -2,7 +2,8 @@ import os
 import cv2
 
 """
-This class is regarding to make it possible to easily access the frames of a certain event. This is done at the start of processing an event, so from this object, the different models can easily access the frames to process. 
+This class is regarding to make it possible to easily access the frames of a certain event. 
+This is done at the start of processing an event, so from this object, the different models can easily access the frames to process. 
 """
 
 
