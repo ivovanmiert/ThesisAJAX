@@ -1,0 +1,37 @@
+/var/spool/slurm/slurmd/job7783290/slurm_script: line 13: model: command not found
+============================================================================================== 
+Warning! Mixing Conda and module environments may lead to corruption of the
+user environment. 
+We do not recommend users mixing those two environments unless absolutely
+necessary. Note that 
+SURF does not provide any support for Conda environment.
+For more information, please refer to our software policy page:
+https://servicedesk.surf.nl/wiki/display/WIKI/Software+policy+Snellius#SoftwarepolicySnellius-UseofAnacondaandMinicondaenvironmentsonSnellius 
+
+Remember that many packages have already been installed on the system and can
+be loaded using 
+the 'module load <package__name>' command. If you are uncertain if a package is
+already available 
+on the system, please use 'module avail' or 'module spider' to search for it.
+============================================================================================== 
+/var/spool/slurm/slurmd/job7783290/slurm_script: line 18: cd: /home/ivanmiert/home/ivanmiert/overview/FRAMES_EXTRACTION/: No such file or directory
+Traceback (most recent call last):
+  File "/home/ivanmiert/overview/FRAMES_EXTRACTION/extracting_frames_clip.py", line 120, in <module>
+    folder_path = config['folders']['dataframe_chunks_folder']
+KeyError: 'dataframe_chunks_folder'
+srun: error: gcn19: task 0: Exited with exit code 1
+srun: Terminating StepId=7783290.0
+
+JOB STATISTICS
+==============
+Job ID: 7783290
+Cluster: snellius
+User/Group: ivanmiert/ivanmiert
+State: FAILED (exit code 1)
+Nodes: 1
+Cores per node: 18
+CPU Utilized: 00:00:03
+CPU Efficiency: 1.11% of 00:04:30 core-walltime
+Job Wall-clock time: 00:00:15
+Memory Utilized: 1.62 MB
+Memory Efficiency: 0.00% of 120.00 GB
