@@ -1,0 +1,6 @@
+data_paths:
+  json_directory: "D:\\GITHUB\\Data_CEP\\Collection\\Data\\Wyscout\\event_files"
+  output_directory_dataframes: "D:\\GITHUB\\Data_CEP\\Collection\\Data\\Wyscout\\event_dataframes"
+  output_file_full_dataframe: "D:\\GITHUB\\Data_CEP\\Collection\\Data\\Wyscout\\full_dataframe"
+  video_directory: "D:/Footage/All_matches"
+  
