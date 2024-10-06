@@ -1,0 +1,10 @@
+data_paths:
+  output_file_full_dataframe: "D:\\GITHUB\\Data_CEP\\Collection\\Data\\Wyscout\\full_dataframe"
+  dataframe_processed: "D:\\GITHUB\\Data_CEP\\Exploration\\dataframe_expanded.csv"
+  labeled_dataset_singleview: "D:\\GITHUB\\Data_CEP\\Pre_Processing\\Single_View\\labeled_dataset_single_view.csv"
+  folder_frames_dataset_singleview: "D:\\GITHUB\\Data_CEP\\Pre_Processing\\Single_View\\classification_frames"
+  folder_sliced_clips: "D:\\Footage\\Sliced_Clips"
+  dataset_sliced_clips: "D:\\GITHUB\\Data_CEP\\Pre_Processing\\Single_View\\sliced_clips.csv"
+  
+model_paths:
+  single_view_classifier_model_path: "D:\\GITHUB\\Data_CEP\\Pre_Processing\\Single_View\\model_checkpoints\\model.keras"
