@@ -1,4 +1,10 @@
 
+"""
+This class contains the information on a single player object. The player object is initialized if a detection is there for the first time. 
+It is initialized with the information on: player_Id, team, pixel coordinates of the first detection, transformed pitch coordinates of the first detection, its hpe_pixel coordinates, the frame_number of the first detection. 
+From there on, its information on positions is updated for every frame the player object is detected.
+"""
+
 class Player:
     def __init__(self, player_id, team_classification, pixel_coordinates, pitch_coordinates, hpe_pixel_coordinates, current_frame_number, hpe_only):
         """
