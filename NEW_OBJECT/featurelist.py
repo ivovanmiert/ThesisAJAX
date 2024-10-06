@@ -2,6 +2,10 @@ from feature_ball_related import BallInfo
 from feature_player_related import PlayerInfo
 import pandas as pd
 
+"""
+This class functions as an object that collects all PlayerInfo and BallInfo data, and save them in a structured way
+"""
+
 class FeatureListGeneral:
     def __init__(self, ball, field_keypoints, players, max_players):
         """
