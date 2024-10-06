@@ -68,11 +68,9 @@ def load_data_from_folder(folder_path, label_csv_path):
 
             df.fillna(0, inplace=True)
             
-            # Get all columns except 'frame_number' and 'ID'
             features_columns = df.drop(columns=['frame_number', 'ID']).columns
             df[features_columns] = scaler.transform(df[features_columns])
 
-            # Process data frame by frame
             frames = df['frame_number'].unique()
             frame_data = []
             for frame in frames:
@@ -94,10 +92,9 @@ class ClipDataset(Dataset):
         self.scaler = StandardScaler()
         all_features = np.concatenate([frame['features'] for clip in data for frame in clip['frame_data']], axis=0)
         self.scaler.fit(all_features)
-        # Create a label encoder for each label column
         self.label_encoders = {col: LabelEncoder() for col in label_columns}
         for col in label_columns:
-            all_labels = [clip[col] for clip in data]  # Collect all labels for this column
+            all_labels = [clip[col] for clip in data] 
             self.label_encoders[col].fit(all_labels)
         
     def __len__(self):
@@ -107,7 +104,7 @@ class ClipDataset(Dataset):
         clip = self.data[idx]
         for frame in clip['frame_data']:
             frame['features'] = self.scaler.transform(frame['features'])
-        # Encode each label column and store it in a dictionary
+
         labels = {col: torch.tensor(self.label_encoders[col].transform([clip[col]])[0], dtype=torch.long)
                   for col in self.label_columns}
         
@@ -137,14 +134,13 @@ def collate_fn(batch):
     
     return padded_sequences, labels, masks
 
-# Split data into training and validation sets
+
 def split_dataset(dataset, val_split=0.2, test_split=0.1):
     test_size = int(len(dataset)* test_split)
     val_size = int(len(dataset) * val_split)
     train_size = len(dataset) - val_size - test_size
     return random_split(dataset, [train_size, val_size, test_size])
 
-# Train the model with validation
 def train_model(folder_path, label_csv_path, input_size=28, hidden_size=128, num_layers=2, batch_size=8, epochs=10, learning_rate=0.001, weight_decay=1e-4, clip_value=5):
     # Load data and initialize dataset
     print('lets start')
@@ -160,7 +156,6 @@ def train_model(folder_path, label_csv_path, input_size=28, hidden_size=128, num
     data = load_data_from_folder(folder_path, label_csv_path)
     dataset = ClipDataset(data, label_columns=['label', 'body_part_label', 'duel_label', 'pass_label', 'cross_accurate', 'cross_direction', 'cross_flank', 'pass_accurate', 'pass_direction', 'pass_distance', 'pass_progressive', 'pass_through', 'shot_on_target', 'shot_goal'])
     print('finished loading')
-    #  Save the original dataset
     torch.save(dataset, save_path_dataset)
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
