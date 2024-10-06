@@ -27,7 +27,7 @@ import os
 
 
 """
-This class can be seen as the main class of an Event. From this class, everything about an event is handled. 
+This class can be seen as the main class of an Event. This class handles everything on a certain event and makes sure the resulting features are stored in the right place'[
 """
 
 class EventData:
