@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 """
-This file is about creating the features related to the ball. It uses the ball object created, together with the player objects stored in Players. 
+This class is about creating the features related to the ball. It uses the ball object created, together with the player objects stored in Players. 
 
 """
 
