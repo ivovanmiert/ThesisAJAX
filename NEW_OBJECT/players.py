@@ -2,6 +2,12 @@ import pickle
 import numpy as np
 import math
 
+"""
+This class contains a Players object, in which all Player objects are stored. It thus is a collection of Player objects. 
+With the Players object, certain actions of merging Player objects for re-identification, or deleting Player objects when they are outside of the field boundaries can be done as well
+"""
+
+
 class Players:
     def __init__(self):
         """
