@@ -1,6 +1,8 @@
 import pandas as pd
 
-
+"""
+This class contains some helper functions that are used throughout other functions in this folder
+"""
 
 def load_detection_df(file_path):
     df = pd.read_csv(file_path, header=None, names=['frame_id', 'track_id', 'x_min', 'y_min', 'x_max', 'y_max', '-1', '-2', '-3', '-4'])
